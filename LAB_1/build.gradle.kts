@@ -23,6 +23,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.1")
     implementation("org.assertj:assertj-core:3.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
+    testImplementation("org.testng:testng:7.1.0")
 }
 
 tasks.test {
