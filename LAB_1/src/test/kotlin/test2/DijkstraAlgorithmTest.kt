@@ -1,3 +1,6 @@
+package test2
+
+import DijkstraAlgorithm
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Test
 
@@ -44,19 +47,19 @@ class DijkstraAlgorithmTest {
         assertArrayEquals(expectedShortestPath, shortestPath)
     }
 
-        @Test
-        fun testIfNoPath() {
-            val graph = arrayOf(
-                intArrayOf(0, 0, 0, 0),
-                intArrayOf(0, 0, 0, 0),
-                intArrayOf(0, 0, 0, 0),
-                intArrayOf(0, 0, 0, 0)
-            )
-            val dijkstra = DijkstraAlgorithm(graph)
-            val shortestPath = dijkstra.shortestPath(3)
-            val expectedNoPath = intArrayOf(-1, -1, -1, 0)
-            assertArrayEquals(expectedNoPath, shortestPath)
-        }
+    @Test
+    fun testIfNoPath() {
+        val graph = arrayOf(
+            intArrayOf(0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0),
+            intArrayOf(0, 0, 0, 0)
+        )
+        val dijkstra = DijkstraAlgorithm(graph)
+        val shortestPath = dijkstra.shortestPath(3)
+        val expectedNoPath = intArrayOf(-1, -1, -1, 0)
+        assertArrayEquals(expectedNoPath, shortestPath)
+    }
 
     @Test
     fun testAllNodesReachable() {

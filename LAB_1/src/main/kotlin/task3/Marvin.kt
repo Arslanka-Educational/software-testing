@@ -1,12 +1,22 @@
 package task3
 
+import org.jetbrains.annotations.TestOnly
+
 internal class Marvin(
-    private val logicalSchemes: List<LogicalScheme>,
-    private var emotionalState: EmotionalState,
-    private var direction: Direction,
+    private val _logicalSchemes: List<LogicalScheme>,
+    private var _direction: Direction,
+    private var _emotionalState: EmotionalState
 ) {
+    val emotionalState: EmotionalState
+        @TestOnly get() = this._emotionalState
+    val direction: Direction
+        @TestOnly get() = this._direction
+
+    val logicalSchemes: List<LogicalScheme>
+        @TestOnly get() = this._logicalSchemes
+
     fun observeWithEmotionalState(emotionalState: EmotionalState) {
-        this.emotionalState = emotionalState
+        this._emotionalState = emotionalState
     }
 
     fun manipulateIdea(idea: Idea) {
@@ -15,16 +25,13 @@ internal class Marvin(
 
     fun compareMolecularComponents(
         lMolecularComponent: MolecularComponent,
-        rMolecularComponent: MolecularComponent
+        rMolecularComponent: MolecularComponent,
     ): Boolean {
-        return lMolecularComponent.cells.containsAll(rMolecularComponent.cells)
-                && rMolecularComponent.cells.containsAll(
-            lMolecularComponent.cells
-        )
+        return lMolecularComponent.cells == rMolecularComponent.cells
     }
 
     fun measureAvgHydrogenLevel(measurable: HydrogenMeasurable): HydrogenLevel {
-        val avgThreshold = logicalSchemes.map {
+        val avgThreshold = _logicalSchemes.map {
             it.measureHydrogenLevel(measurable = measurable).threshold
         }.average()
 
@@ -32,11 +39,11 @@ internal class Marvin(
     }
 
     fun changeDirectionTo(direction: Direction) {
-        this.direction = direction
+        this._direction = direction
     }
 
     fun disconnectSchemes() {
-        logicalSchemes.forEach {
+        _logicalSchemes.forEach {
             it.disconnect()
         }
     }
