@@ -40,7 +40,7 @@ class DijkstraAlgorithmTest {
         val dijkstra = DijkstraAlgorithm(graph)
         val shortestPath = dijkstra.shortestPath(0)
 
-        val expectedShortestPath = intArrayOf(0, 0, 4, 0, 3, 0, 0, 0)
+        val expectedShortestPath = intArrayOf(0, -1, 4, -1, 3, -1, -1, -1)
         assertArrayEquals(expectedShortestPath, shortestPath)
     }
 
@@ -54,7 +54,32 @@ class DijkstraAlgorithmTest {
             )
             val dijkstra = DijkstraAlgorithm(graph)
             val shortestPath = dijkstra.shortestPath(3)
-            val expectedNoPath = intArrayOf(0, 0, 0, 0)
+            val expectedNoPath = intArrayOf(-1, -1, -1, 0)
             assertArrayEquals(expectedNoPath, shortestPath)
         }
+
+    @Test
+    fun testAllNodesReachable() {
+        val graph = arrayOf(
+            intArrayOf(0, 3, 0, 2),
+            intArrayOf(0, 0, 2, 0),
+            intArrayOf(0, 0, 0, 1),
+            intArrayOf(0, 0, 0, 0)
+        )
+        val dijkstra = DijkstraAlgorithm(graph)
+        val shortestPath = dijkstra.shortestPath(0)
+        val expectedAllReachablePath = intArrayOf(0, 3, 5, 2)
+        assertArrayEquals(expectedAllReachablePath, shortestPath)
+    }
+
+    @Test
+    fun testSingleNodeGraph() {
+        val graph = arrayOf(
+            intArrayOf(0)
+        )
+        val dijkstra = DijkstraAlgorithm(graph)
+        val shortestPath = dijkstra.shortestPath(0)
+        val expectedSingleNodePath = intArrayOf(0)
+        assertArrayEquals(expectedSingleNodePath, shortestPath)
+    }
 }

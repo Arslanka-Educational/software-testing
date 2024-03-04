@@ -1,5 +1,3 @@
-import java.util.*
-
 class DijkstraAlgorithm(private val graph: Array<IntArray>) {
     private val numVertices: Int = graph.size
 
@@ -20,7 +18,7 @@ class DijkstraAlgorithm(private val graph: Array<IntArray>) {
         // Проверяем, остались ли вершины, до которых нет пути, и если да, устанавливаем для них 0
         for (i in dist.indices) {
             if (dist[i] == Int.MAX_VALUE) {
-                dist[i] = 0
+                dist[i] = -1
             }
         }
 
