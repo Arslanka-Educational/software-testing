@@ -1,6 +1,6 @@
-package task3.enum
+package task3
 
-enum class EmotionalState(val description: String) {
+internal enum class EmotionalState(val description: String) {
     COLD_CONTEMPT("холодное презрение"),
     DESPERATION("отчаяние")
 }
