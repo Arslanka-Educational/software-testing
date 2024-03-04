@@ -27,13 +27,18 @@ internal class Marvin(
         lMolecularComponent: MolecularComponent,
         rMolecularComponent: MolecularComponent,
     ): Boolean {
-        return lMolecularComponent.cells == rMolecularComponent.cells
+        return lMolecularComponent.cells.containsAll(rMolecularComponent.cells) &&
+                rMolecularComponent.cells.containsAll(
+                    lMolecularComponent.cells
+                )
     }
 
     fun measureAvgHydrogenLevel(measurable: HydrogenMeasurable): HydrogenLevel {
         val avgThreshold = _logicalSchemes.map {
             it.measureHydrogenLevel(measurable = measurable).threshold
         }.average()
+
+        println(avgThreshold)
 
         return HydrogenLevel.getLevelByThreshold(hydrogenLevelThreshold = avgThreshold)
     }

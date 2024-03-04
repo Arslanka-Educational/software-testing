@@ -111,4 +111,19 @@ class MarvinTest {
         marvin.disconnectSchemes()
         assertThat(marvin.logicalSchemes.any { it.state == SchemaState.ACTIVE }).isFalse()
     }
+
+    @Test
+    fun `measureAvgHydrogenLevel should return avg level`() {
+        val threshold = 20.0
+
+        val hydrogenLevel = marvin.measureAvgHydrogenLevel(
+            measurable = CubicParsecSpace(
+                HydrogenLevel.getLevelByThreshold(
+                    hydrogenLevelThreshold = 10.0,
+                )
+            )
+        )
+
+        assertThat(hydrogenLevel).isEqualTo(HydrogenLevel.getLevelByThreshold(threshold))
+    }
 }
