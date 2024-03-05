@@ -1,8 +1,8 @@
 package task3
-internal enum class HydrogenLevel(val threshold: Int, val description: String) {
-    LOW(10, "низкий"),
-    NORMAL(20, "нормальный"),
-    HIGH(30, "высокий");
+internal enum class HydrogenLevel(val threshold: Double, val description: String) {
+    LOW(10.0, "низкий"),
+    NORMAL(20.0, "нормальный"),
+    HIGH(30.0, "высокий");
 
     companion object {
         fun getLevelByThreshold(hydrogenLevelThreshold: Double): HydrogenLevel {
