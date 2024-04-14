@@ -19,6 +19,9 @@ dependencies {
     implementation("org.assertj:assertj-core:3.11.0")
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.1.0")
+    testImplementation("org.testng:testng:7.1.0")
+    testImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+
 }
 
 tasks.test {
@@ -26,5 +29,5 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(19)
 }

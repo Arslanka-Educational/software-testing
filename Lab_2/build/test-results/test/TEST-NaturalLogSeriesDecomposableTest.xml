@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="NaturalLogSeriesDecomposableTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-14T11:42:49" hostname="Zhenyas-Laptop.local" time="0.01">
+  <properties/>
+  <testcase name="test decompose with negative input()" classname="NaturalLogSeriesDecomposableTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
