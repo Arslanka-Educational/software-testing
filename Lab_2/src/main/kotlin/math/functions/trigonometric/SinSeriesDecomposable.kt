@@ -19,19 +19,17 @@ internal class SinSeriesDecomposable(
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
         val x = input.toBigDecimal()
         var sinX = BigDecimal.ZERO
-        var term = BigDecimal.ZERO
+        var term: BigDecimal
         var n = 0
-        var sign = 1
 
         do {
-            term = BigDecimal.valueOf(sign.toDouble()).multiply(
-                x.pow(2 * n + 1)
-                    .divide(factorial(2 * n + 1), BigDecimal.ROUND_HALF_EVEN)
-            )
+            term = x.pow(2 * n + 1)
+                .divide(factorial(2 * n + 1), 50, BigDecimal.ROUND_HALF_EVEN)
+                .multiply(BigDecimal.valueOf((-1).toDouble()).pow(n))
+
             sinX = sinX.add(term)
             n++
-            sign *= -1
-        } while (term.abs() > BigDecimal.valueOf(accuracy))
+        } while (term.abs() >= BigDecimal.valueOf(accuracy))
 
         return BigDecimalInfinityExtended(sinX)
     }
@@ -39,8 +37,9 @@ internal class SinSeriesDecomposable(
     private fun factorial(n: Int): BigDecimal {
         var result = BigDecimal.ONE
         for (i in 2..n) {
-            result *= BigDecimal(i)
+            result *= BigDecimal.valueOf(i.toDouble())
         }
         return result
     }
+
 }
