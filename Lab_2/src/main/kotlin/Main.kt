@@ -3,6 +3,7 @@ import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.functions.trigonometric.CosSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
+import math.functions.trigonometric.TanSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import java.math.BigDecimal
 
@@ -16,6 +17,8 @@ fun main() {
     val log5Results = mutableListOf<Pair<Double, Double>>()
     val sinResults = mutableListOf<Pair<Double, Double>>()
     val cosResults = mutableListOf<Pair<Double, Double>>()
+    val cscResults = mutableListOf<Pair<Double, Double>>()
+    val tanResults = mutableListOf<Pair<Double, Double>>()
 
     val step = 0.1
     val start = 0.1
@@ -24,18 +27,22 @@ fun main() {
     val naturalLogSeries = NaturalLogSeriesDecomposable(0.0001)
     val sinSeries = SinSeriesDecomposable(0.0001)
     val cosSeries = CosSeriesDecomposable(sinSeries)
+    val cscSeries = CosSeriesDecomposable(sinSeries)
+    val tanSeries = TanSeriesDecomposable(sinSeries,cosSeries)
     val log2Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(2)), naturalLogSeries)
     val log3Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(3)), naturalLogSeries)
     val log5Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(5)), naturalLogSeries)
 
     var x = start
     while (x <= end) {
-     //   naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-      //  log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-     //   log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-     //   log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        tanResults.add(x to tanSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         x += step
     }
 
@@ -45,4 +52,6 @@ fun main() {
     csvWriter.write(log5Results, "log5_results.csv")
     csvWriter.write(sinResults, "sin_results.csv")
     csvWriter.write(cosResults, "cos_results.csv")
+    csvWriter.write(tanResults, "tan_results.csv")
+    csvWriter.write(cscResults, "csc_results.csv")
 }
