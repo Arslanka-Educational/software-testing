@@ -8,7 +8,7 @@ import math.numbers.BigDecimalInfinityExtended
 import java.math.BigDecimal
 
 fun main() {
-    val csvWriter = CSVWriter("../../../resources")
+    val csvWriter = CSVWriter("../../resources")
 
     val naturalLogResults = mutableListOf<Pair<Double, Double>>()
     val log2Results = mutableListOf<Pair<Double, Double>>()
@@ -34,14 +34,14 @@ fun main() {
 
     var x = start
     while (x <= end) {
-        //naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        //log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        // log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        // sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        // cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        // cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        // tanResults.add(x to tanSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        tanResults.add(x to tanSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         x += step
     }
 
