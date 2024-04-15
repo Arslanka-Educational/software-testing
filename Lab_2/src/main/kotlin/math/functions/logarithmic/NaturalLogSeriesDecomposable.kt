@@ -20,7 +20,9 @@ internal class NaturalLogSeriesDecomposable(
         )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
-        val xReplacement = (input.toBigDecimal() - BigDecimal.ONE) / (BigDecimal.ONE + input.toBigDecimal())
+        val x = input.toBigDecimal()
+        println(x)
+        val xReplacement: BigDecimal = (input.toBigDecimal() - BigDecimal.ONE) / (BigDecimal.ONE + input.toBigDecimal())
         var numerator = xReplacement
         var denominator = BigDecimal.ONE
         var result = BigDecimal.TWO * numerator / denominator
@@ -31,7 +33,7 @@ internal class NaturalLogSeriesDecomposable(
             denominator += BigDecimal.TWO
             result += BigDecimal.TWO * numerator / denominator
             numberOfTerms++
-        } while (numberOfTerms <= MAX_NUMBER_OF_TERMS)
+        } while (numberOfTerms <= MAX_NUMBER_OF_TERMS) //TODO(improve)
 
         return BigDecimalInfinityExtended(result)
     }

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree.Companion.test
-
 plugins {
     kotlin("jvm") version "1.9.22"
 }

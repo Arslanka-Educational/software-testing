@@ -77,6 +77,6 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
     companion object {
         private val NEGATIVE_INFINITY = BigDecimal(Double.MIN_VALUE)
         private val POSITIVE_INFINITY = BigDecimal(Double.MAX_VALUE)
-        private val NAN: BigDecimal = BigDecimal(0)
+        private val NAN: BigDecimal = BigDecimal(Double.MAX_VALUE)
     }
 }

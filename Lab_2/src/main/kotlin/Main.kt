@@ -8,8 +8,7 @@ import math.numbers.BigDecimalInfinityExtended
 import java.math.BigDecimal
 
 fun main() {
-    val folderPath = "/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/main/kotlin/fileCSV"
-    val csvWriter = CSVWriter(folderPath)
+    val csvWriter = CSVWriter("../../../resources")
 
     val naturalLogResults = mutableListOf<Pair<Double, Double>>()
     val log2Results = mutableListOf<Pair<Double, Double>>()
@@ -24,8 +23,8 @@ fun main() {
     val start = 0.1
     val end = 10.0
 
-    val naturalLogSeries = NaturalLogSeriesDecomposable(0.0001)
-    val sinSeries = SinSeriesDecomposable(0.0001)
+    val naturalLogSeries = NaturalLogSeriesDecomposable(0.001)
+    val sinSeries = SinSeriesDecomposable(0.001)
     val cosSeries = CosSeriesDecomposable(sinSeries)
     val cscSeries = CosSeriesDecomposable(sinSeries)
     val tanSeries = TanSeriesDecomposable(sinSeries,cosSeries)
@@ -35,14 +34,14 @@ fun main() {
 
     var x = start
     while (x <= end) {
-        naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        //naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-        tanResults.add(x to tanSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        //log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        // log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        // sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        // cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        // cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+        // tanResults.add(x to tanSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         x += step
     }
 

@@ -12,12 +12,14 @@ import java.math.MathContext
 internal class TanSeriesDecomposable(
     private val sinSeriesDecomposable: SinSeriesDecomposable,
     private val cosSeriesDecomposable: CosSeriesDecomposable,
-
-    ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
+) :
+    SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
     override fun getName(): String = "tan"
-    override fun getDomain(): Range<in BigDecimalInfinityExtended> = BigDecimalOpenRange(
-        startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
-        endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+    override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
+        BigDecimalOpenRange(
+            startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
+            endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+        )
     )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
@@ -28,5 +30,4 @@ internal class TanSeriesDecomposable(
             sin.toBigDecimal() / cos.toBigDecimal()
         )
     }
-
 }
