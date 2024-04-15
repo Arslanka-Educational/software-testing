@@ -1,6 +1,7 @@
-package math.functions.logarithmic
+package math.functions.logarithmic.logarithmic
 
 import math.functions.domains.OutOfDomainException
+import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import org.assertj.core.api.SoftAssertions
 import org.junit.jupiter.api.TestInstance
