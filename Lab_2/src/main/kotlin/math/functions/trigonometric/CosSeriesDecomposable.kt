@@ -6,6 +6,7 @@ import math.numbers.minus
 import math.numbers.times
 import math.ranges.BigDecimalOpenRange
 import math.ranges.Range
+import java.math.BigDecimal
 import java.math.MathContext
 
 internal class CosSeriesDecomposable(
@@ -21,10 +22,13 @@ internal class CosSeriesDecomposable(
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
         val sin = sinSeriesDecomposable.decompose(input = input, accuracy = accuracy)
-
         return BigDecimalInfinityExtended(
-            (BigDecimalInfinityExtended(1.0) - (sin * sin)).toBigDecimal()
-                .sqrt(MathContext(10))
+            if (sin < BigDecimalInfinityExtended(0.0)) {
+                (((BigDecimalInfinityExtended(1.0) - sin * sin)).toBigDecimal().sqrt(MathContext(10))) * BigDecimal(-1.0)
+            } else {
+                (BigDecimalInfinityExtended(1.0) - sin * sin).toBigDecimal().sqrt(MathContext(10))
+            }
         )
     }
+
 }
