@@ -5,19 +5,18 @@ import math.numbers.BigDecimalInfinityExtended
 import math.ranges.BigDecimalOpenStartRange
 import math.ranges.Range
 import java.math.BigDecimal
-import java.math.MathContext
-import java.math.MathContext.DECIMAL128
-import kotlin.math.ln
 
 internal class NaturalLogSeriesDecomposable(
-    val accuracy: Double,
+    override val accuracy: Double,
 ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(accuracy) {
 
     override fun getName(): String = "Ln"
-    override fun getDomain(): Range<in BigDecimalInfinityExtended> =
-        BigDecimalOpenStartRange(
-            startExclusive = BigDecimalInfinityExtended(0.0),
-            end = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+    override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> =
+        listOf(
+            BigDecimalOpenStartRange(
+                startExclusive = BigDecimalInfinityExtended(0.0),
+                end = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+            )
         )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {

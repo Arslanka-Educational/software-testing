@@ -3,7 +3,7 @@ package math.functions
 import math.series.SeriesDecomposable
 
 abstract class SeriesMathFunction<Input, Output, Accuracy>(
-    private val accuracy: Accuracy,
+    open val accuracy: Accuracy,
 ) :
     MathFunction<Input, Output>,
     SeriesDecomposable<Input, Output, Accuracy> where Input : Number, Input : Comparable<Input>, Output : Number, Accuracy : Number {

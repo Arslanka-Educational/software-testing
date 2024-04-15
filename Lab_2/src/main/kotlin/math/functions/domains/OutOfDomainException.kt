@@ -1,4 +1,4 @@
-package math.functions
+package math.functions.domains
 
 import java.lang.RuntimeException
 

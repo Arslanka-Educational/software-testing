@@ -7,13 +7,15 @@ import math.ranges.Range
 import java.math.BigDecimal
 
 internal class SinSeriesDecomposable(
-    val accuracy: Double,
+    override val accuracy: Double,
 ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(accuracy) {
     override fun getName(): String = "sin"
 
-    override fun getDomain(): Range<in BigDecimalInfinityExtended> = BigDecimalOpenRange(
-        startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
-        endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+    override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
+        BigDecimalOpenRange(
+            startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
+            endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+        )
     )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
@@ -41,5 +43,4 @@ internal class SinSeriesDecomposable(
         }
         return result
     }
-
 }

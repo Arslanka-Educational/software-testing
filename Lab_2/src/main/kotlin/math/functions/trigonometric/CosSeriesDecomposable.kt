@@ -12,9 +12,11 @@ internal class CosSeriesDecomposable(
     private val sinSeriesDecomposable: SinSeriesDecomposable,
 ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
     override fun getName(): String = "cos"
-    override fun getDomain(): Range<in BigDecimalInfinityExtended> = BigDecimalOpenRange(
-        startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
-        endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+    override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
+        BigDecimalOpenRange(
+            startExclusive = BigDecimalInfinityExtended(Double.NEGATIVE_INFINITY),
+            endExclusive = BigDecimalInfinityExtended(Double.POSITIVE_INFINITY),
+        )
     )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
