@@ -5,6 +5,7 @@ import math.numbers.BigDecimalInfinityExtended
 import math.ranges.BigDecimalOpenStartRange
 import math.ranges.Range
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 internal class NaturalLogSeriesDecomposable(
     override val accuracy: Double,
@@ -20,9 +21,7 @@ internal class NaturalLogSeriesDecomposable(
         )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
-        val x = input.toBigDecimal()
-        println(x)
-        val xReplacement: BigDecimal = (input.toBigDecimal() - BigDecimal.ONE) / (BigDecimal.ONE + input.toBigDecimal())
+        val xReplacement = (input.toBigDecimal() - BigDecimal.ONE).divide(BigDecimal.ONE + input.toBigDecimal(), 5, RoundingMode.HALF_EVEN)
         var numerator = xReplacement
         var denominator = BigDecimal.ONE
         var result = BigDecimal.TWO * numerator / denominator
@@ -39,6 +38,6 @@ internal class NaturalLogSeriesDecomposable(
     }
 
     private companion object {
-        const val MAX_NUMBER_OF_TERMS = 10_000
+        const val MAX_NUMBER_OF_TERMS = 1_000
     }
 }
