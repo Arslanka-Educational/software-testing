@@ -40,8 +40,7 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
     override fun toShort(): Short = value.toShort()
     override fun compareTo(other: BigDecimalInfinityExtended): Int {
 
-        if (value === NAN || other.value === NAN
-        ) {
+        if (value === NAN || other.value === NAN) {
             throw UnsupportedOperationException()
         }
 
@@ -59,7 +58,13 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
             }
         }
 
-        return value.compareTo(other.value)
+        return if (other.value === NEGATIVE_INFINITY) {
+            1
+        } else if (other.value === POSITIVE_INFINITY) {
+            -1
+        } else {
+            return value.compareTo(other.value)
+        }
     }
 
     override fun toString(): String {
