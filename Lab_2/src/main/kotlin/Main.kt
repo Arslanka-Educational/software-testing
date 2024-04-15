@@ -1,10 +1,9 @@
+import file.csv.CSVWriter
 import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.functions.trigonometric.CosSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
-import java.io.File
-import java.io.IOException
 import java.math.BigDecimal
 
 fun main() {
