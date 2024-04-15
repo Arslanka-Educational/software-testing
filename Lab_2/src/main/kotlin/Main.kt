@@ -1,11 +1,16 @@
 import file.csv.CSVWriter
+import math.functions.SeriesMathFunction
+import math.functions.complex.PiecewiseFunctionSeriesDecomposable
 import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.functions.trigonometric.CosSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
 import math.functions.trigonometric.TanSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
+import math.numbers.plus
+import math.ranges.BigDecimalOpenRange
 import java.math.BigDecimal
+import java.util.function.Predicate
 
 fun main() {
     val csvWriter = CSVWriter("../../resources")
@@ -27,7 +32,7 @@ fun main() {
     val sinSeries = SinSeriesDecomposable(0.001)
     val cosSeries = CosSeriesDecomposable(sinSeries)
     val cscSeries = CosSeriesDecomposable(sinSeries)
-    val tanSeries = TanSeriesDecomposable(sinSeries,cosSeries)
+    val tanSeries = TanSeriesDecomposable(sinSeries, cosSeries)
     val log2Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(2)), naturalLogSeries)
     val log3Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(3)), naturalLogSeries)
     val log5Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(5)), naturalLogSeries)
@@ -53,4 +58,32 @@ fun main() {
     csvWriter.write(cosResults, "cos_results.csv")
     csvWriter.write(tanResults, "tan_results.csv")
     csvWriter.write(cscResults, "csc_results.csv")
+
+    val p = PiecewiseFunctionSeriesDecomposable(
+        listOf(
+            Pair(SinSeriesDecomposable(accuracy = 0.01).andThen { it + BigDecimalInfinityExtended(0.0) },
+                Predicate {
+                    it in BigDecimalOpenRange(
+                        startExclusive = BigDecimalInfinityExtended(
+                            Double.NEGATIVE_INFINITY
+                        ), endExclusive = BigDecimalInfinityExtended(
+                            Double.POSITIVE_INFINITY
+                        )
+                    )
+                }
+            )
+        ),
+        accuracy = 0.01,
+        domain = listOf(
+            BigDecimalOpenRange(
+                startExclusive = BigDecimalInfinityExtended(
+                    Double.NEGATIVE_INFINITY
+                ), endExclusive = BigDecimalInfinityExtended(
+                    Double.POSITIVE_INFINITY
+                )
+            )
+        )
+    ).apply(BigDecimalInfinityExtended(1.0))
+
+    println(p)
 }

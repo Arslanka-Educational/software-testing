@@ -1,21 +1,24 @@
 package math.functions.complex
 
+import math.functions.MathFunction
 import math.functions.domains.IncorrectDomainException
-import math.functions.SeriesMathFunction
 import math.numbers.BigDecimalInfinityExtended
 import math.ranges.Range
+import java.util.function.Function
 import java.util.function.Predicate
 
 internal class PiecewiseFunctionSeriesDecomposable(
-    private val listOfSeriesFunctions: List<Pair<SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>, Predicate<BigDecimalInfinityExtended>>>,
-) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(listOfSeriesFunctions.maxOf { it.first.accuracy }) {
-    override fun getName(): String = listOfSeriesFunctions.joinToString { it.first.getName() }
+    private val listOfSeriesFunctions: List<Pair<Function<BigDecimalInfinityExtended, BigDecimalInfinityExtended>, Predicate<BigDecimalInfinityExtended>>>,
+    private val domain: List<Range<in BigDecimalInfinityExtended>>,
+    val accuracy: Double,
+) : MathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended> {
+    override fun getName(): String = "piecewise"
 
     override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> {
-        return listOfSeriesFunctions.flatMap { it.first.getDomain() }.toList()
+        return domain
     }
 
-    override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
+    override fun calculate(input: BigDecimalInfinityExtended): BigDecimalInfinityExtended {
         if (listOfSeriesFunctions.count { it.second.test(input) } > 1) {
             throw IncorrectDomainException(getName())
         }
