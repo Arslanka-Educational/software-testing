@@ -1,7 +1,7 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree.Companion.test
 
 plugins {
     kotlin("jvm") version "1.9.22"
-    application
 }
 
 group = "org.example"
@@ -12,22 +12,27 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.assertj:assertj-core:3.11.0")
     testImplementation(kotlin("test"))
+    testImplementation("org.assertj:assertj-core:3.11.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.1.0")
-    testImplementation("org.testng:testng:7.1.0")
-    testImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
-
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
 }
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("failed")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = false
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+    }
 }
-
 kotlin {
-    jvmToolchain(19)
+    jvmToolchain(21)
 }

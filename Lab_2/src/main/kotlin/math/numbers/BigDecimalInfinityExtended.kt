@@ -20,9 +20,10 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
     }
 
     fun toBigDecimal(): BigDecimal {
-        return when (value) {
-            NEGATIVE_INFINITY, POSITIVE_INFINITY, NAN -> throw UnsupportedOperationException()
-            else -> value
+        return if (value === NEGATIVE_INFINITY || value === POSITIVE_INFINITY || value === NAN) {
+            throw UnsupportedOperationException()
+        } else {
+            value
         }
     }
 
@@ -62,17 +63,20 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
     }
 
     override fun toString(): String {
-        return when (value) {
-            NEGATIVE_INFINITY -> "NEGATIVE_INFINITY"
-            POSITIVE_INFINITY -> "POSITIVE_INFINITY"
-            NAN -> "NAN"
-            else -> value.toPlainString()
+        return if (value === NEGATIVE_INFINITY) {
+            "NEGATIVE_INFINITY"
+        } else if (value === POSITIVE_INFINITY) {
+            "POSITIVE_INFINITY"
+        } else if (value === NAN) {
+            "NAN"
+        } else {
+            value.toPlainString()
         }
     }
 
     companion object {
-        val NEGATIVE_INFINITY = BigDecimal(Double.MIN_VALUE)
-        val POSITIVE_INFINITY = BigDecimal(Double.MAX_VALUE)
-        private val NAN: BigDecimal = BigDecimal.ZERO
+        private val NEGATIVE_INFINITY = BigDecimal(Double.MIN_VALUE)
+        private val POSITIVE_INFINITY = BigDecimal(Double.MAX_VALUE)
+        private val NAN: BigDecimal = BigDecimal(0)
     }
 }

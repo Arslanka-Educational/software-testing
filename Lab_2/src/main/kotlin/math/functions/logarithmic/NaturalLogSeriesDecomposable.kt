@@ -6,6 +6,8 @@ import math.ranges.BigDecimalOpenStartRange
 import math.ranges.Range
 import java.math.BigDecimal
 import java.math.MathContext
+import java.math.MathContext.DECIMAL128
+import kotlin.math.ln
 
 internal class NaturalLogSeriesDecomposable(
     val accuracy: Double,
@@ -19,24 +21,23 @@ internal class NaturalLogSeriesDecomposable(
         )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
-        require(input > BigDecimalInfinityExtended(0.0)) { "Input must be greater than 0" }
+        val xReplacement = (input.toBigDecimal() - BigDecimal.ONE) / (BigDecimal.ONE + input.toBigDecimal())
+        var numerator = xReplacement
+        var denominator = BigDecimal.ONE
+        var result = BigDecimal.TWO * numerator / denominator
+        var numberOfTerms = 1
 
-        val x = input.toBigDecimal()
-        val terms = mutableListOf<BigDecimal>()
-        var result = BigDecimal.ZERO
-
-        var n = 1
-        var term = BigDecimal.ONE
-        var sign = BigDecimal.ONE
-
-        while (term.abs() > BigDecimal(accuracy)) {
-            result += term
-            terms.add(result)
-            n++
-            sign = sign.negate()
-            term = sign * ((x - BigDecimal.ONE).pow(n)).divide(BigDecimal(n), MathContext.DECIMAL128)
-        }
+        do {
+            numerator *= xReplacement * xReplacement
+            denominator += BigDecimal.TWO
+            result += BigDecimal.TWO * numerator / denominator
+            numberOfTerms++
+        } while (numberOfTerms <= MAX_NUMBER_OF_TERMS)
 
         return BigDecimalInfinityExtended(result)
+    }
+
+    private companion object {
+        const val MAX_NUMBER_OF_TERMS = 10_000
     }
 }
