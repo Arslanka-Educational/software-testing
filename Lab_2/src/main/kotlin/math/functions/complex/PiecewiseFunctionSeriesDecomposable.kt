@@ -9,7 +9,7 @@ import java.util.function.Predicate
 internal class PiecewiseFunctionSeriesDecomposable(
     private val listOfSeriesFunctions: List<Pair<SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>, Predicate<BigDecimalInfinityExtended>>>,
 ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(listOfSeriesFunctions.maxOf { it.first.accuracy }) {
-    override fun getName(): String = "Piecewise"
+    override fun getName(): String = listOfSeriesFunctions.joinToString { it.first.getName() }
 
     override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> {
         return listOfSeriesFunctions.flatMap { it.first.getDomain() }.toList()
