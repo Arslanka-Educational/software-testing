@@ -11,7 +11,8 @@ import java.math.MathContext
 
 internal class CscSeriesDecomposable(
     private val sinSeriesDecomposable: SinSeriesDecomposable,
-) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
+    override val accuracy: Double,
+    ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
     override fun getName(): String = "csc"
     override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
         BigDecimalOpenRange(
@@ -22,7 +23,6 @@ internal class CscSeriesDecomposable(
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
         val sin = sinSeriesDecomposable.decompose(input = input, accuracy = accuracy)
-
         return BigDecimalInfinityExtended(
             BigDecimalInfinityExtended(1.0).toBigDecimal() / sin.toBigDecimal()
         )

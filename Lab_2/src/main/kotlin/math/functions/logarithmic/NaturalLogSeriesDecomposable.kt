@@ -7,6 +7,7 @@ import math.ranges.Range
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+
 internal class NaturalLogSeriesDecomposable(
     override val accuracy: Double,
 ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(accuracy) {

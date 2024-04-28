@@ -12,7 +12,8 @@ import java.math.MathContext
 internal class TanSeriesDecomposable(
     private val sinSeriesDecomposable: SinSeriesDecomposable,
     private val cosSeriesDecomposable: CosSeriesDecomposable,
-) :
+    override val accuracy: Double,
+    ) :
     SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(sinSeriesDecomposable.accuracy) {
     override fun getName(): String = "tan"
     override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
