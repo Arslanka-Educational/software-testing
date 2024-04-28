@@ -14,7 +14,6 @@ import java.math.BigDecimal
 import java.util.stream.Stream
 import kotlin.math.pow
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class NaturalLogSeriesDecomposableTest {
 
     private val naturalLogSeriesDecomposable = NaturalLogSeriesDecomposable(accuracy = ACCURACY)

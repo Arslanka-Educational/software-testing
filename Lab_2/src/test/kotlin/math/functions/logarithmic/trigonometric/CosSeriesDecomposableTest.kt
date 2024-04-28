@@ -5,38 +5,39 @@ import math.functions.trigonometric.SinSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
 import java.math.BigDecimal
 
-class CosSeriesDecomposableTest {
+@ExtendWith(MockitoExtension::class)
+internal class CosSeriesDecomposableTest {
+
+    @Mock
+    private lateinit var sinSeriesMock: SinSeriesDecomposable
 
     @Test
-    fun `test decompose when sin is 0`() {
-        val sinSeriesMock = Mockito.mock(SinSeriesDecomposable::class.java)
-        Mockito.`when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(0.0), 0.001))
+    internal fun `test decompose when sin is 0`() {
+        `when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(0.0), 0.001))
             .thenReturn(BigDecimalInfinityExtended(0.0))
 
-        val cosSeries = CosSeriesDecomposable(sinSeriesMock)
+        val result = CosSeriesDecomposable(accuracy = 0.001, sinSeriesDecomposable = sinSeriesMock).apply(
+            BigDecimalInfinityExtended(0.0)
+        )
 
-        val result = cosSeries.apply(BigDecimalInfinityExtended(0.0))
-
-        assertEquals(BigDecimalInfinityExtended(1.0), result)
+        assertEquals(BigDecimalInfinityExtended(BigDecimal.ONE), result)
     }
 
     @Test
-    fun `test decompose when sin is not 0`() {
-        // Mocking SinSeriesDecomposable
-        val sinSeriesMock = Mockito.mock(SinSeriesDecomposable::class.java)
-        Mockito.`when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(0.0), 0.001))
-            .thenReturn(BigDecimalInfinityExtended(0.5)) // Setting sin to 0.5 for testing
+    internal fun `test decompose when sin is not 0`() {
+        `when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(Math.PI / 3), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(0.5))
 
-        // Creating instance of CosSeriesDecomposable with mocked SinSeriesDecomposable
-        val cosSeries = CosSeriesDecomposable(sinSeriesMock)
+        val cosSeries = CosSeriesDecomposable(0.001, sinSeriesMock)
 
-        // Testing the decompose method of CosSeriesDecomposable
-        val result = cosSeries.apply(BigDecimalInfinityExtended(0.0))
+        val result = cosSeries.apply(BigDecimalInfinityExtended(Math.PI / 3))
 
-        // Asserting the result
-        assertEquals(BigDecimalInfinityExtended(0.8660254038), result, "Test with sin=0.5")
+        assertEquals(BigDecimalInfinityExtended(0.866), result)
     }
 }

@@ -11,7 +11,7 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
             Double.NEGATIVE_INFINITY -> NEGATIVE_INFINITY
             Double.POSITIVE_INFINITY -> POSITIVE_INFINITY
             Double.NaN -> NAN
-            else -> value.toBigDecimal()
+            else -> value.toBigDecimal().stripTrailingZeros()
         }
     }
 
@@ -77,6 +77,19 @@ class BigDecimalInfinityExtended : Number, Comparable<BigDecimalInfinityExtended
         } else {
             value.toPlainString()
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as BigDecimalInfinityExtended
+
+        return value.stripTrailingZeros() == other.value.stripTrailingZeros()
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
     }
 
     companion object {

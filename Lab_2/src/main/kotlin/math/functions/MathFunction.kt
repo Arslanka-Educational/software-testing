@@ -10,7 +10,7 @@ interface MathFunction<Input, Output> :
     fun getName(): String
     fun getDomain(): List<Range<in Input>>
     fun calculate(input: Input): Output
-    override fun apply(input: Input): Output {
+    override fun  apply(input: Input): Output {
         return if (getDomain().any { it.contains(input) }) {
             calculate(input)
         } else {

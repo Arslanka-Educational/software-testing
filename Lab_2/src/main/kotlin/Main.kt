@@ -30,8 +30,8 @@ fun main() {
 
     val naturalLogSeries = NaturalLogSeriesDecomposable(0.001)
     val sinSeries = SinSeriesDecomposable(0.001)
-    val cosSeries = CosSeriesDecomposable(sinSeries)
-    val cscSeries = CosSeriesDecomposable(sinSeries)
+    val cosSeries = CosSeriesDecomposable(0.001, sinSeries)
+    val cscSeries = CosSeriesDecomposable(0.001, sinSeries)
     val tanSeries = TanSeriesDecomposable(sinSeries, cosSeries)
     val log2Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(2)), naturalLogSeries)
     val log3Series = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(BigDecimal(3)), naturalLogSeries)

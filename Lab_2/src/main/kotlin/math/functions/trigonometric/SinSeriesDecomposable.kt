@@ -33,7 +33,7 @@ internal class SinSeriesDecomposable(
             n++
         } while (term.abs() >= BigDecimal.valueOf(accuracy))
 
-        return BigDecimalInfinityExtended(sinX)
+        return BigDecimalInfinityExtended(sinX.stripTrailingZeros())
     }
 
     private fun factorial(n: Int): BigDecimal {
