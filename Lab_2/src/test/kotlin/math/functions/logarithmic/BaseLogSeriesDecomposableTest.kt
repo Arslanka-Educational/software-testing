@@ -20,7 +20,7 @@ internal class BaseLogSeriesDecomposableTest {
         `when`(naturalLogSeriesMock.decompose(BigDecimalInfinityExtended(2.0), 0.001))
             .thenReturn(BigDecimalInfinityExtended(0.693))
 
-        val result = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(10.0), naturalLogSeriesMock)
+        val result = BaseLogSeriesDecomposable(0.001,BigDecimalInfinityExtended(10.0), naturalLogSeriesMock)
             .decompose(BigDecimalInfinityExtended(2.0), 0.001) ?: BigDecimal.ZERO
 
         assertEquals(BigDecimalInfinityExtended(0.301), result)
@@ -31,7 +31,7 @@ internal class BaseLogSeriesDecomposableTest {
         `when`(naturalLogSeriesMock.decompose(BigDecimalInfinityExtended(Math.E), 0.001))
             .thenReturn(BigDecimalInfinityExtended(1.0))
 
-        val result = BaseLogSeriesDecomposable(BigDecimalInfinityExtended(Math.E), naturalLogSeriesMock)
+        val result = BaseLogSeriesDecomposable(0.001,BigDecimalInfinityExtended(Math.E), naturalLogSeriesMock)
             .decompose(BigDecimalInfinityExtended(Math.E), 0.001)
 
         assertEquals(BigDecimalInfinityExtended(1.0), result)

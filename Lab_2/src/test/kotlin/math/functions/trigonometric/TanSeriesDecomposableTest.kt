@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
+import kotlin.math.PI
 
 @ExtendWith(MockitoExtension::class)
 internal class TanSeriesDecomposableTest {
@@ -54,6 +55,46 @@ internal class TanSeriesDecomposableTest {
 
         val result = TanSeriesDecomposable(sinSeriesMock, cosSeriesMock, 0.001)
             .decompose(BigDecimalInfinityExtended(0.7853981633974483), 0.001)
+
+        assertEquals(BigDecimalInfinityExtended(1.0), result)
+    }
+
+
+
+    @Test
+    internal fun `test decompose when sin is positive and cos is negative`() {
+        `when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(PI / 6), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(0.5))
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(PI / 6), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(-0.866))
+
+        val result = TanSeriesDecomposable(sinSeriesMock, cosSeriesMock, 0.001)
+            .decompose(BigDecimalInfinityExtended(PI / 6), 0.001)
+
+        assertEquals(BigDecimalInfinityExtended(-0.6), result)
+    }
+
+    @Test
+    internal fun `test decompose when sin is negative and cos is positive`() {
+        `when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(5 * PI / 6), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(-0.5))
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(5 * PI / 6), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(0.866))
+
+        val result = TanSeriesDecomposable(sinSeriesMock, cosSeriesMock, 0.001)
+            .decompose(BigDecimalInfinityExtended(5 * PI / 6), 0.001)
+
+        assertEquals(BigDecimalInfinityExtended(-0.6), result)
+    }
+
+    @Test
+    internal fun `test decompose when sin and cos are negative`() {
+        `when`(sinSeriesMock.decompose(BigDecimalInfinityExtended(7 * PI / 4), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(-0.707))
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(7 * PI / 4), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(-0.707))
+        val result = TanSeriesDecomposable(sinSeriesMock, cosSeriesMock, 0.001)
+            .decompose(BigDecimalInfinityExtended(7 * PI / 4), 0.001)
 
         assertEquals(BigDecimalInfinityExtended(1.0), result)
     }

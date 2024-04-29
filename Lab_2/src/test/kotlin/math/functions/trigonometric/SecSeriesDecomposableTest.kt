@@ -60,4 +60,50 @@ internal class SecSeriesDecomposableTest {
 
         assertEquals(BigDecimalInfinityExtended(-1.0), result)
     }
+
+    @Test
+    internal fun `test decompose when cos is -1 and accuracy is small`() {
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(Math.PI), 1E-10))
+            .thenReturn(BigDecimalInfinityExtended(-1.0))
+
+        val result = SecSeriesDecomposable(cosSeriesMock, 1E-10)
+            .decompose(BigDecimalInfinityExtended(Math.PI), 1E-10)
+
+        assertEquals(BigDecimalInfinityExtended(-1.0), result)
+    }
+
+    @Test
+    internal fun `test decompose when cos is -1 and accuracy is large`() {
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(Math.PI), 1E10))
+            .thenReturn(BigDecimalInfinityExtended(-1.0))
+
+        val result = SecSeriesDecomposable(cosSeriesMock, 1E10)
+            .decompose(BigDecimalInfinityExtended(Math.PI), 1E10)
+
+        assertEquals(BigDecimalInfinityExtended(-1.0), result)
+    }
+
+    @Test
+    internal fun `test decompose when cos is 1 and accuracy is small`() {
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(0.0), 1E-10))
+            .thenReturn(BigDecimalInfinityExtended(1.0))
+
+        val result = SecSeriesDecomposable(cosSeriesMock, 1E-10)
+            .decompose(BigDecimalInfinityExtended(0.0), 1E-10)
+
+        assertEquals(BigDecimalInfinityExtended(1.0), result)
+    }
+
+    @Test
+    internal fun `test decompose when cos is 1 and accuracy is large`() {
+        `when`(cosSeriesMock.decompose(BigDecimalInfinityExtended(0.0), 1E10))
+            .thenReturn(BigDecimalInfinityExtended(1.0))
+
+        val result = SecSeriesDecomposable(cosSeriesMock, 1E10)
+            .decompose(BigDecimalInfinityExtended(0.0), 1E10)
+
+        assertEquals(BigDecimalInfinityExtended(1.0), result)
+    }
+
+
 }

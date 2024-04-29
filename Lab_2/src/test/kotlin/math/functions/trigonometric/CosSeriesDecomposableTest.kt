@@ -1,5 +1,5 @@
-package math.functions.trigonometric
-
+import math.functions.trigonometric.CosSeriesDecomposable
+import math.functions.trigonometric.SinSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -19,12 +19,51 @@ internal class CosSeriesDecomposableTest {
     internal fun `test decompose when sin is 0`() {
         `when`(
             sinSeriesMock.decompose(BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)), 0.001)
-        ).thenReturn(BigDecimalInfinityExtended(1.0))
+        ).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
 
         val result = CosSeriesDecomposable(accuracy = 0.001, sinSeriesDecomposable = sinSeriesMock).apply(
             BigDecimalInfinityExtended(0.0)
         )
 
         assertEquals(BigDecimalInfinityExtended(BigDecimal.ONE), result)
+    }
+
+    @Test
+    internal fun `test decompose when sin is not 0`() {
+        `when`(
+            sinSeriesMock.decompose(BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)), 0.001)
+        ).thenReturn(BigDecimalInfinityExtended(BigDecimal.valueOf(0.5)))
+
+        val result = CosSeriesDecomposable(accuracy = 0.001, sinSeriesDecomposable = sinSeriesMock).apply(
+            BigDecimalInfinityExtended(0.0)
+        )
+
+        assertEquals(BigDecimalInfinityExtended(BigDecimal.valueOf(0.5)), result)
+    }
+
+    @Test
+    internal fun `test decompose when sin is 1`() {
+        `when`(
+            sinSeriesMock.decompose(BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)), 0.001)
+        ).thenReturn(BigDecimalInfinityExtended(1.0))
+
+        val result = CosSeriesDecomposable(accuracy = 0.001, sinSeriesDecomposable = sinSeriesMock).apply(
+            BigDecimalInfinityExtended(Math.PI)
+        )
+
+        assertEquals(BigDecimalInfinityExtended(BigDecimal.valueOf(-1.0)), result)
+    }
+
+    @Test
+    internal fun `test decompose when sin is -1`() {
+        `when`(
+            sinSeriesMock.decompose(BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)), 0.001)
+        ).thenReturn(BigDecimalInfinityExtended(-1.0))
+
+        val result = CosSeriesDecomposable(accuracy = 0.001, sinSeriesDecomposable = sinSeriesMock).apply(
+            BigDecimalInfinityExtended(Math.PI)
+        )
+
+        assertEquals(BigDecimalInfinityExtended(BigDecimal.valueOf(-1.0)), result)
     }
 }
