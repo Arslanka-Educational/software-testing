@@ -14,6 +14,7 @@ import math.numbers.plus
 import math.ranges.BigDecimalOpenRange
 import math.ranges.BigDecimalOpenStartRange
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
@@ -29,19 +30,42 @@ class PiecewiseFunctionSeriesDecomposableTest {
     @Mock
     private lateinit var naturalLogSeriesDecomposable: NaturalLogSeriesDecomposable
 
-    private companion object {
-        private const val ACCURACY = 0.0001
-        private val sin = SinSeriesDecomposable(ACCURACY)
-        private val cos = CosSeriesDecomposable(ACCURACY, sin)
-        private val tan = TanSeriesDecomposable(sin, cos, ACCURACY)
-        private val cot = CotSeriesDecomposable(sin, cos, ACCURACY)
-        private val sec = SecSeriesDecomposable(cos, ACCURACY)
-        private val csc = CscSeriesDecomposable(sin, ACCURACY)
-        private val ln = NaturalLogSeriesDecomposable(ACCURACY)
-        private val log3 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln)
-        private val log2 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln)
-        private val log5 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln)
-        private val piecewiseFunction = PiecewiseFunctionSeriesDecomposable(
+    @Mock
+    private lateinit var sin: SinSeriesDecomposable
+ //   @Mock
+   // private lateinit var ln: NaturalLogSeriesDecomposable
+    @Mock
+    private lateinit var cos: CosSeriesDecomposable
+    @Mock
+    private lateinit var tan: TanSeriesDecomposable
+    @Mock
+    private lateinit var cot: CotSeriesDecomposable
+    @Mock
+    private lateinit var sec: SecSeriesDecomposable
+    @Mock
+    private lateinit var csc: CscSeriesDecomposable
+    @Mock
+    private lateinit var ln: NaturalLogSeriesDecomposable
+    private val ACCURACY = 0.0001
+    private val log3 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln)
+    private val log2 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln)
+    private val log5 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln)
+
+    @BeforeAll
+    internal fun `test all fun`() {
+        val ACCURACY = 0.0001
+//        private val sin = SinSeriesDecomposable(ACCURACY)
+//        private val cos = CosSeriesDecomposable(ACCURACY, sin)
+//        private val tan = TanSeriesDecomposable(sin, cos, ACCURACY)
+//        private val cot = CotSeriesDecomposable(sin, cos, ACCURACY)
+//        private val sec = SecSeriesDecomposable(cos, ACCURACY)
+//        private val csc = CscSeriesDecomposable(sin, ACCURACY)
+//        private val ln = NaturalLogSeriesDecomposable(ACCURACY)
+    //    private val ACCURACY = 0.0001
+     //   private val log3 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln)
+     //   private val log2 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln)
+     //   private val log5 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln)
+         val piecewiseFunction = PiecewiseFunctionSeriesDecomposable(
             listOf(
                 Pair(((((((((((((((((sec / cos) * csc) / sec) + sec) pow 3) / cos) +
                     (tan - tan)) * csc) - sin) / cos) / cos) pow 3) / ((((cos * csc) pow 2) * (csc pow 2)) - (sec * csc))) * sec) pow 3)
