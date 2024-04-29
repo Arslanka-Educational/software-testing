@@ -46,8 +46,4 @@ internal class CscSeriesDecomposableTest {
 
         assertEquals(BigDecimalInfinityExtended(1.0), result)
     }
-
-
-
-
 }

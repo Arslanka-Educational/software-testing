@@ -24,15 +24,9 @@ internal class CosSeriesDecomposable(
     )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
-        val sin = sinSeriesDecomposable.decompose(input = input, accuracy = accuracy)
-        val mc = MathContext(  1 + abs(log10(accuracy)).toInt())
-        return BigDecimalInfinityExtended(
-            if (sin < BigDecimalInfinityExtended(0.0)) {
-                (((BigDecimalInfinityExtended(1.0) - sin * sin)).toBigDecimal().sqrt( mc) * BigDecimal(-1.0))
-            } else {
-                (BigDecimalInfinityExtended(1.0) - sin * sin).toBigDecimal().sqrt(mc)
-            }
+        return sinSeriesDecomposable.decompose(
+            input = BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)) - input,
+            accuracy = accuracy,
         )
     }
-
 }

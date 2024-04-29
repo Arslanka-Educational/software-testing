@@ -15,9 +15,7 @@ import java.math.BigDecimal
 import java.util.function.Predicate
 
 fun main() {
-    val csvWriter = CSVWriter("../../resources")
-   // val csvWriter = CSVWriter("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/main/resources")
-
+    val csvWriter = CSVWriter("src/main/resources")
 
     val naturalLogResults = mutableListOf<Pair<Double, Double>>()
     val log2Results = mutableListOf<Pair<Double, Double>>()
@@ -45,10 +43,10 @@ fun main() {
 
     var x = start
     while (x <= end) {
-       // naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-      //  log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-      //  log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
-      //  log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+       naturalLogResults.add(x to naturalLogSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+       log2Results.add(x to log2Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+       log3Results.add(x to log3Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
+       log5Results.add(x to log5Series.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         sinResults.add(x to sinSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         cosResults.add(x to cosSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
         cscResults.add(x to cscSeries.decompose(BigDecimalInfinityExtended(x), 0.001).toDouble())
@@ -57,10 +55,10 @@ fun main() {
         x += step
     }
 
-   // csvWriter.write(naturalLogResults, "natural_log_results.csv")
-   // csvWriter.write(log2Results, "log2_results.csv")
-   // csvWriter.write(log3Results, "log3_results.csv")
-   // csvWriter.write(log5Results, "log5_results.csv")
+   csvWriter.write(naturalLogResults, "natural_log_results.csv")
+   csvWriter.write(log2Results, "log2_results.csv")
+   csvWriter.write(log3Results, "log3_results.csv")
+   csvWriter.write(log5Results, "log5_results.csv")
     csvWriter.write(sinResults, "sin_results.csv")
     csvWriter.write(cosResults, "cos_results.csv")
     csvWriter.write(tanResults, "tan_results.csv")
@@ -93,5 +91,4 @@ fun main() {
         )
     ).apply(BigDecimalInfinityExtended(1.0))
 
-    println(p)
 }

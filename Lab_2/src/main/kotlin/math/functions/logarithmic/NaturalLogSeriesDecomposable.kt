@@ -43,6 +43,6 @@ internal class NaturalLogSeriesDecomposable(
     }
 
     private companion object {
-        const val MAX_NUMBER_OF_TERMS = 5_000
+        const val MAX_NUMBER_OF_TERMS = 5000
     }
 }
