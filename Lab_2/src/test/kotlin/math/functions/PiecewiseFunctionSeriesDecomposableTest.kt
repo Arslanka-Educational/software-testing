@@ -10,62 +10,50 @@ import math.functions.trigonometric.SecSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
 import math.functions.trigonometric.TanSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
-import math.numbers.plus
+import math.numbers.pow
 import math.ranges.BigDecimalOpenRange
-import math.ranges.BigDecimalOpenStartRange
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mock
-import org.mockito.junit.jupiter.MockitoExtension
+import org.junit.jupiter.api.TestInstance
+import org.mockito.Mockito
+import org.mockito.Mockito.any
+import org.mockito.Mockito.`when`
+import java.math.BigDecimal
 import java.util.function.Predicate
 
-@ExtendWith(MockitoExtension::class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PiecewiseFunctionSeriesDecomposableTest {
 
-    @Mock
-    private lateinit var sinSeriesMock: SinSeriesDecomposable
-
-    @Mock
-    private lateinit var naturalLogSeriesDecomposable: NaturalLogSeriesDecomposable
-
-    @Mock
     private lateinit var sin: SinSeriesDecomposable
- //   @Mock
-   // private lateinit var ln: NaturalLogSeriesDecomposable
-    @Mock
     private lateinit var cos: CosSeriesDecomposable
-    @Mock
     private lateinit var tan: TanSeriesDecomposable
-    @Mock
     private lateinit var cot: CotSeriesDecomposable
-    @Mock
     private lateinit var sec: SecSeriesDecomposable
-    @Mock
     private lateinit var csc: CscSeriesDecomposable
-    @Mock
     private lateinit var ln: NaturalLogSeriesDecomposable
-    private val ACCURACY = 0.0001
-    private val log3 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln)
-    private val log2 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln)
-    private val log5 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln)
+    private lateinit var log2: BaseLogSeriesDecomposable
+    private lateinit var log3: BaseLogSeriesDecomposable
+    private lateinit var log5: BaseLogSeriesDecomposable
+    private lateinit var piecewiseFunctionSeriesDecomposable: PiecewiseFunctionSeriesDecomposable
+
+    private companion object {
+        private const val ACCURACY = 0.0001
+    }
 
     @BeforeAll
-    internal fun `test all fun`() {
-        val ACCURACY = 0.0001
-//        private val sin = SinSeriesDecomposable(ACCURACY)
-//        private val cos = CosSeriesDecomposable(ACCURACY, sin)
-//        private val tan = TanSeriesDecomposable(sin, cos, ACCURACY)
-//        private val cot = CotSeriesDecomposable(sin, cos, ACCURACY)
-//        private val sec = SecSeriesDecomposable(cos, ACCURACY)
-//        private val csc = CscSeriesDecomposable(sin, ACCURACY)
-//        private val ln = NaturalLogSeriesDecomposable(ACCURACY)
-    //    private val ACCURACY = 0.0001
-     //   private val log3 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln)
-     //   private val log2 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln)
-     //   private val log5 = BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln)
-         val piecewiseFunction = PiecewiseFunctionSeriesDecomposable(
+    internal fun init() {
+        sin = Mockito.mock(SinSeriesDecomposable::class.java)
+        cos = Mockito.mock(CosSeriesDecomposable::class.java)
+        tan = Mockito.mock(TanSeriesDecomposable::class.java)
+        cot = Mockito.mock(CotSeriesDecomposable::class.java)
+        sec = Mockito.mock(SecSeriesDecomposable::class.java)
+        csc = Mockito.mock(CscSeriesDecomposable::class.java)
+        ln = Mockito.mock(NaturalLogSeriesDecomposable::class.java)
+        log2 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
+        log3 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
+        log5 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
+        piecewiseFunctionSeriesDecomposable = PiecewiseFunctionSeriesDecomposable(
             listOf(
                 Pair(((((((((((((((((sec / cos) * csc) / sec) + sec) pow 3) / cos) +
                     (tan - tan)) * csc) - sin) / cos) / cos) pow 3) / ((((cos * csc) pow 2) * (csc pow 2)) - (sec * csc))) * sec) pow 3)
@@ -104,10 +92,29 @@ class PiecewiseFunctionSeriesDecomposableTest {
                         Double.NEGATIVE_INFINITY,
                     ),
                     endExclusive = BigDecimalInfinityExtended(
-                        0.0,
+                        Double.POSITIVE_INFINITY,
                     ),
                 ),
             ),
+        )
+    }
+
+    @Test
+    internal fun `local min`() {
+        val input = BigDecimalInfinityExtended(0.448)
+        `when`(sin.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(cos.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(tan.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(cot.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(csc.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(sec.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(ln.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(log2.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(log3.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        `when`(log5.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
+        assertThat(piecewiseFunctionSeriesDecomposable.apply(input)).isBetween(
+            BigDecimalInfinityExtended(8.376) pow 13,
+            BigDecimalInfinityExtended(8.376) pow 15
         )
     }
 }

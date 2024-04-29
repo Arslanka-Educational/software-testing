@@ -13,3 +13,6 @@ operator fun BigDecimalInfinityExtended.div(other: BigDecimalInfinityExtended): 
 
 operator fun BigDecimalInfinityExtended.times(other: BigDecimalInfinityExtended): BigDecimalInfinityExtended =
     BigDecimalInfinityExtended(this.toBigDecimal().multiply(other.toBigDecimal()))
+
+infix fun BigDecimalInfinityExtended.pow(num: Int): BigDecimalInfinityExtended =
+    BigDecimalInfinityExtended(this.toBigDecimal().pow(num))
