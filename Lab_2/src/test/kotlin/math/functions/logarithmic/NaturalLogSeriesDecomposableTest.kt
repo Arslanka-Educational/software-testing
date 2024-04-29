@@ -1,10 +1,9 @@
-package math.functions.logarithmic.logarithmic
+package math.functions.logarithmic
 
 import math.functions.domains.OutOfDomainException
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import org.assertj.core.api.SoftAssertions
-import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments

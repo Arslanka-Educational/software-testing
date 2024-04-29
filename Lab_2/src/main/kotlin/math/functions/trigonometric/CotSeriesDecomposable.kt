@@ -3,14 +3,10 @@ package math.functions.trigonometric
 import math.functions.SeriesMathFunction
 import math.numbers.BigDecimalInfinityExtended
 import math.numbers.div
-import math.numbers.minus
-import math.numbers.times
 import math.ranges.BigDecimalOpenRange
 import math.ranges.Range
-import java.math.BigDecimal
-import java.math.MathContext
 
-internal class TanSeriesDecomposable(
+internal class CotSeriesDecomposable(
     private val sinSeriesDecomposable: SinSeriesDecomposable,
     private val cosSeriesDecomposable: CosSeriesDecomposable,
     override val accuracy: Double,
@@ -28,6 +24,6 @@ internal class TanSeriesDecomposable(
         val sin = sinSeriesDecomposable.decompose(input = input, accuracy = accuracy)
         val cos = cosSeriesDecomposable.decompose(input = input, accuracy = accuracy)
 
-        return sin / cos
+        return cos / sin
     }
 }

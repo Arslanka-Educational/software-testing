@@ -12,7 +12,7 @@ import java.math.MathContext
 internal class SecSeriesDecomposable(
     private val cosSeriesDecomposable: CosSeriesDecomposable,
     override val accuracy: Double,
-    ) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(cosSeriesDecomposable.accuracy) {
+) : SeriesMathFunction<BigDecimalInfinityExtended, BigDecimalInfinityExtended, Double>(cosSeriesDecomposable.accuracy) {
     override fun getName(): String = "sec"
     override fun getDomain(): List<Range<in BigDecimalInfinityExtended>> = listOf(
         BigDecimalOpenRange(
@@ -24,8 +24,6 @@ internal class SecSeriesDecomposable(
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
         val cos = cosSeriesDecomposable.decompose(input = input, accuracy = accuracy)
 
-        return BigDecimalInfinityExtended(
-            BigDecimal.ONE / cos.toBigDecimal()
-        )
+        return BigDecimalInfinityExtended(1.0) / cos
     }
 }

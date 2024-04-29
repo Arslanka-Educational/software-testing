@@ -1,7 +1,5 @@
-package math.functions.logarithmic.trigonometric
+package math.functions.trigonometric
 
-import math.functions.trigonometric.CosSeriesDecomposable
-import math.functions.trigonometric.SinSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
