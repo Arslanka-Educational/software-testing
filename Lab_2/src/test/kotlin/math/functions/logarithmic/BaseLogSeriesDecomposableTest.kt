@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
-import java.math.BigDecimal
 
 @ExtendWith(MockitoExtension::class)
 internal class BaseLogSeriesDecomposableTest {
@@ -16,22 +15,25 @@ internal class BaseLogSeriesDecomposableTest {
     private lateinit var naturalLogSeriesMock: NaturalLogSeriesDecomposable
 
     @Test
-    fun `test decompose`() { // TODO LN = null
+    internal fun `test decompose`() {
         `when`(naturalLogSeriesMock.decompose(BigDecimalInfinityExtended(2.0), 0.001))
             .thenReturn(BigDecimalInfinityExtended(0.693))
 
-        val result = BaseLogSeriesDecomposable(0.001,BigDecimalInfinityExtended(10.0), naturalLogSeriesMock)
-            .decompose(BigDecimalInfinityExtended(2.0), 0.001) ?: BigDecimal.ZERO
+        `when`(naturalLogSeriesMock.decompose(BigDecimalInfinityExtended(10.0), 0.001))
+            .thenReturn(BigDecimalInfinityExtended(0.693))
 
-        assertEquals(BigDecimalInfinityExtended(0.301), result)
+        val result = BaseLogSeriesDecomposable(0.001, BigDecimalInfinityExtended(10.0), naturalLogSeriesMock)
+            .decompose(BigDecimalInfinityExtended(2.0), 0.001)
+
+        assertEquals(BigDecimalInfinityExtended(1.0), result)
     }
 
     @Test
-    fun `test decompose when base is e`() {
+    internal fun `test decompose when base is e`() {
         `when`(naturalLogSeriesMock.decompose(BigDecimalInfinityExtended(Math.E), 0.001))
             .thenReturn(BigDecimalInfinityExtended(1.0))
 
-        val result = BaseLogSeriesDecomposable(0.001,BigDecimalInfinityExtended(Math.E), naturalLogSeriesMock)
+        val result = BaseLogSeriesDecomposable(0.01, BigDecimalInfinityExtended(Math.E), naturalLogSeriesMock)
             .decompose(BigDecimalInfinityExtended(Math.E), 0.001)
 
         assertEquals(BigDecimalInfinityExtended(1.0), result)

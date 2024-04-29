@@ -2,6 +2,7 @@ package math.functions.logarithmic
 
 import math.functions.SeriesMathFunction
 import math.numbers.BigDecimalInfinityExtended
+import math.numbers.div
 import math.ranges.BigDecimalOpenStartRange
 import math.ranges.Range
 
@@ -21,8 +22,5 @@ internal class BaseLogSeriesDecomposable(
         )
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended =
-        BigDecimalInfinityExtended(
-            naturalLogSeriesDecomposable.decompose(input, accuracy)
-                .toBigDecimal() / naturalLogSeriesDecomposable.decompose(base, accuracy).toBigDecimal()
-        )
+        naturalLogSeriesDecomposable.decompose(input, accuracy) / naturalLogSeriesDecomposable.decompose(base, accuracy)
 }
