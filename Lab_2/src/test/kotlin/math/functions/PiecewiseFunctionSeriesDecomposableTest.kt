@@ -1,5 +1,6 @@
 package math.functions
 
+import file.csv.CSVWriter
 import math.functions.complex.PiecewiseFunctionSeriesDecomposable
 import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
@@ -99,22 +100,93 @@ class PiecewiseFunctionSeriesDecomposableTest {
         )
     }
 
+
     @Test
     internal fun `local min`() {
-        val input = BigDecimalInfinityExtended(0.448)
-        `when`(sin.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(cos.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(tan.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(cot.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(csc.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(sec.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(ln.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(log2.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(log3.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        `when`(log5.apply(any())).thenReturn(BigDecimalInfinityExtended(BigDecimal.ONE))
-        assertThat(piecewiseFunctionSeriesDecomposable.apply(input)).isBetween(
-            BigDecimalInfinityExtended(8.376) pow 13,
-            BigDecimalInfinityExtended(8.376) pow 15
-        )
+        val cos_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/cos_values.csv")
+        val cot_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/cot_values.csv")
+        val csc_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/csc_values.csv")
+        val sec_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/sec_values.csv")
+        val sin_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/sin_values.csv")
+        val tan_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/tan_values.csv")
+        val ln_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/ln_values.csv")
+        val log2_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log2_values.csv")
+        val log3_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log3_values.csv")
+        val log5_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log5_values.csv")
+        val piecewiseFunction_data =
+            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/piecewiseFunction.csv")
+
+        for (i in piecewiseFunction_data.indices) {
+            val xValue = BigDecimal(piecewiseFunction_data[i][0])
+            val yValue = BigDecimal(piecewiseFunction_data[i][1])
+
+            if (xValue < BigDecimal.ZERO) {
+                `when`(sin.apply(BigDecimalInfinityExtended(sin_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        sin_data[i][1]
+                    )
+                )
+                `when`(cos.apply(BigDecimalInfinityExtended(cos_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        cos_data[i][1]
+                    )
+                )
+                `when`(tan.apply(BigDecimalInfinityExtended(tan_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        tan_data[i][1]
+                    )
+                )
+                `when`(cot.apply(BigDecimalInfinityExtended(cot_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        cot_data[i][1]
+                    )
+                )
+                `when`(csc.apply(BigDecimalInfinityExtended(csc_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        csc_data[i][1]
+                    )
+                )
+                `when`(sec.apply(BigDecimalInfinityExtended(sec_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        sec_data[i][1]
+                    )
+                )
+            } else {
+                `when`(ln.apply(BigDecimalInfinityExtended(ln_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        ln_data[i][1]
+                    )
+                )
+                `when`(log2.apply(BigDecimalInfinityExtended(log2_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        log2_data[i][1]
+                    )
+                )
+                `when`(log3.apply(BigDecimalInfinityExtended(log3_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        log3_data[i][1]
+                    )
+                )
+                `when`(log5.apply(BigDecimalInfinityExtended(log5_data[i][0]))).thenReturn(
+                    BigDecimalInfinityExtended(
+                        log5_data[i][1]
+                    )
+                )
+            }
+            assertThat(piecewiseFunctionSeriesDecomposable.apply(BigDecimalInfinityExtended(xValue))).isBetween(
+                BigDecimalInfinityExtended(yValue).pow(13),
+                BigDecimalInfinityExtended(yValue).pow(15)
+            )
+        }
     }
 }
