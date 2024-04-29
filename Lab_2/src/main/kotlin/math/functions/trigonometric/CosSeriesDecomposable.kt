@@ -8,6 +8,7 @@ import math.ranges.BigDecimalOpenRange
 import math.ranges.Range
 import java.math.BigDecimal
 import java.math.MathContext
+import java.math.RoundingMode
 import kotlin.math.abs
 import kotlin.math.log10
 
@@ -25,7 +26,16 @@ internal class CosSeriesDecomposable(
 
     override fun decompose(input: BigDecimalInfinityExtended, accuracy: Double): BigDecimalInfinityExtended {
         return sinSeriesDecomposable.decompose(
-            input = BigDecimalInfinityExtended(BigDecimal.valueOf(Math.PI).div(BigDecimal.TWO)) - input,
+            input = BigDecimalInfinityExtended(
+                BigDecimal.valueOf(Math.PI).divide(
+                    BigDecimal.TWO,
+                    MathContext(
+                        1 + abs(
+                            log10(accuracy)
+                        ).toInt()
+                    ),
+                ),
+            ) - input,
             accuracy = accuracy,
         )
     }
