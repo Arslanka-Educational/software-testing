@@ -1,6 +1,6 @@
 package math.functions
 
-import file.csv.CSVWriter
+import file.csv.CSVUtils
 import math.functions.complex.PiecewiseFunctionSeriesDecomposable
 import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
@@ -20,6 +20,7 @@ import org.junit.jupiter.api.TestInstance
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import java.math.BigDecimal
+import java.nio.file.Path
 import java.util.function.Predicate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -101,33 +102,33 @@ class PiecewiseFunctionSeriesDecomposableTest {
 
 
     @Test
-    internal fun `local min`() {
+    internal fun `piecewise test`() {
         val cosData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/cos_values.csv")
+            CSVUtils.readCSV(Path.of("../../resources/dataInput/cos_values.csv"))
         val cotData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/cot_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/cot_values.csv"))
         val cscData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/csc_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/csc_values.csv"))
         val secData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/sec_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/sec_values.csv"))
         val sinData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/sin_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/sin_values.csv"))
         val tanData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/tan_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/tan_values.csv"))
         val lnData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/ln_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/ln_values.csv"))
         val log2Data =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log2_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log2_values.csv"))
         val log3Data =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log3_values.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log3_values.csv"))
         val log5Data =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log5_values.csv")
-        val piecewiseFunctionData =
-            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/piecewiseFunction.csv")
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log5_values.csv"))
+        val piecewisefunctionData =
+            CSVUtils.readCSV(Path.of("../../../resources/dataInput/piecewiseFunction.csv"))
 
-        for (i in piecewiseFunctionData.indices) {
-            val xValue = BigDecimal(piecewiseFunctionData[i][0])
-            val yValue = BigDecimal(piecewiseFunctionData[i][1])
+        for (i in piecewisefunctionData.indices) {
+            val xValue = BigDecimal(piecewisefunctionData[i][0])
+            val yValue = BigDecimal(piecewisefunctionData[i][1])
 
             if (xValue < BigDecimal.ZERO) {
                 `when`(sin.apply(BigDecimalInfinityExtended(sinData[i][0]))).thenReturn(

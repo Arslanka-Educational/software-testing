@@ -1,6 +1,4 @@
-import file.csv.CSVWriter
-import math.functions.complex.PiecewiseFunctionSeriesDecomposable
-import math.functions.div
+import file.csv.CSVUtils
 import math.functions.logarithmic.BaseLogSeriesDecomposable
 import math.functions.logarithmic.NaturalLogSeriesDecomposable
 import math.functions.trigonometric.CosSeriesDecomposable
@@ -9,12 +7,10 @@ import math.functions.trigonometric.SecSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
 import math.functions.trigonometric.TanSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
-import math.ranges.BigDecimalOpenRange
 import java.math.BigDecimal
-import java.util.function.Predicate
 
 fun main() {
-    val csvWriter = CSVWriter("src/main/resources")
+    val csvUtils = CSVUtils("src/main/resources")
 
     val naturalLogResults = mutableListOf<Pair<Double, Double>>()
     val log2Results = mutableListOf<Pair<Double, Double>>()
@@ -54,13 +50,13 @@ fun main() {
         x += step
     }
 
-    csvWriter.write(naturalLogResults, "natural_log_results.csv")
-    csvWriter.write(log2Results, "log2_results.csv")
-    csvWriter.write(log3Results, "log3_results.csv")
-    csvWriter.write(log5Results, "log5_results.csv")
-    csvWriter.write(sinResults, "sin_results.csv")
-    csvWriter.write(cosResults, "cos_results.csv")
-    csvWriter.write(tanResults, "tan_results.csv")
-    csvWriter.write(cscResults, "csc_results.csv")
-    csvWriter.write(secResults, "sec_results.csv")
+    csvUtils.write(naturalLogResults, "natural_log_results.csv")
+    csvUtils.write(log2Results, "log2_results.csv")
+    csvUtils.write(log3Results, "log3_results.csv")
+    csvUtils.write(log5Results, "log5_results.csv")
+    csvUtils.write(sinResults, "sin_results.csv")
+    csvUtils.write(cosResults, "cos_results.csv")
+    csvUtils.write(tanResults, "tan_results.csv")
+    csvUtils.write(cscResults, "csc_results.csv")
+    csvUtils.write(secResults, "sec_results.csv")
 }

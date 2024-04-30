@@ -1,12 +1,11 @@
 package file.csv
 
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileReader
+import java.io.FileInputStream
 import java.io.IOException
-import java.math.BigDecimal
+import java.nio.file.Path
 
-class CSVWriter(private val folderPath: String) {
+class CSVUtils(private val folderPath: String) {
     fun write(data: List<Pair<Double, Double>>, filename: String) {
         val csvData = data.map { "${it.first}, ${it.second}" }
         val file = File("$folderPath/$filename")
@@ -25,12 +24,10 @@ class CSVWriter(private val folderPath: String) {
     }
     companion object {
         @JvmStatic
-        fun readCSV(fileName: String): List<List<Double>> {
+        fun readCSV(filePath: Path): List<List<Double>> {
             val data = mutableListOf<List<Double>>()
-            val file = File(fileName)
-            file.bufferedReader().use { reader ->
-                var line = reader.readLine() // Skip header
-                line = reader.readLine() // Read first line of data
+            filePath.toFile().bufferedReader().use { reader ->
+                var line = reader.readLine()
                 while (line != null) {
                     val values = line.split(",").map { it.trim().toDouble() }
                     data.add(values)
