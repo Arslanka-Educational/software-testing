@@ -103,83 +103,83 @@ class PiecewiseFunctionSeriesDecomposableTest {
 
     @Test
     internal fun `local min`() {
-        val cos_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/cos_values.csv")
-        val cot_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/cot_values.csv")
-        val csc_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/csc_values.csv")
-        val sec_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/sec_values.csv")
-        val sin_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/sin_values.csv")
-        val tan_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/tan_values.csv")
-        val ln_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/ln_values.csv")
-        val log2_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log2_values.csv")
-        val log3_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log3_values.csv")
-        val log5_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/log5_values.csv")
-        val piecewiseFunction_data =
-            CSVWriter.readCSV("/Users/zhenyamint/IdeaProjects/TPO 2/software-testing/Lab_2/src/test/kotlin/math/functions/dataInput/piecewiseFunction.csv")
+        val cosData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/cos_values.csv")
+        val cotData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/cot_values.csv")
+        val cscData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/csc_values.csv")
+        val secData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/sec_values.csv")
+        val sinData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/sin_values.csv")
+        val tanData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/tan_values.csv")
+        val lnData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/ln_values.csv")
+        val log2Data =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log2_values.csv")
+        val log3Data =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log3_values.csv")
+        val log5Data =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/log5_values.csv")
+        val piecewiseFunctionData =
+            CSVWriter.readCSV("./src/test/kotlin/math/functions/dataInput/piecewiseFunction.csv")
 
-        for (i in piecewiseFunction_data.indices) {
-            val xValue = BigDecimal(piecewiseFunction_data[i][0])
-            val yValue = BigDecimal(piecewiseFunction_data[i][1])
+        for (i in piecewiseFunctionData.indices) {
+            val xValue = BigDecimal(piecewiseFunctionData[i][0])
+            val yValue = BigDecimal(piecewiseFunctionData[i][1])
 
             if (xValue < BigDecimal.ZERO) {
-                `when`(sin.apply(BigDecimalInfinityExtended(sin_data[i][0]))).thenReturn(
+                `when`(sin.apply(BigDecimalInfinityExtended(sinData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        sin_data[i][1]
+                        sinData[i][1]
                     )
                 )
-                `when`(cos.apply(BigDecimalInfinityExtended(cos_data[i][0]))).thenReturn(
+                `when`(cos.apply(BigDecimalInfinityExtended(cosData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        cos_data[i][1]
+                        cosData[i][1]
                     )
                 )
-                `when`(tan.apply(BigDecimalInfinityExtended(tan_data[i][0]))).thenReturn(
+                `when`(tan.apply(BigDecimalInfinityExtended(tanData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        tan_data[i][1]
+                        tanData[i][1]
                     )
                 )
-                `when`(cot.apply(BigDecimalInfinityExtended(cot_data[i][0]))).thenReturn(
+                `when`(cot.apply(BigDecimalInfinityExtended(cotData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        cot_data[i][1]
+                        cotData[i][1]
                     )
                 )
-                `when`(csc.apply(BigDecimalInfinityExtended(csc_data[i][0]))).thenReturn(
+                `when`(csc.apply(BigDecimalInfinityExtended(cscData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        csc_data[i][1]
+                        cscData[i][1]
                     )
                 )
-                `when`(sec.apply(BigDecimalInfinityExtended(sec_data[i][0]))).thenReturn(
+                `when`(sec.apply(BigDecimalInfinityExtended(secData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        sec_data[i][1]
+                        secData[i][1]
                     )
                 )
             } else {
-                `when`(ln.apply(BigDecimalInfinityExtended(ln_data[i][0]))).thenReturn(
+                `when`(ln.apply(BigDecimalInfinityExtended(lnData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        ln_data[i][1]
+                        lnData[i][1]
                     )
                 )
-                `when`(log2.apply(BigDecimalInfinityExtended(log2_data[i][0]))).thenReturn(
+                `when`(log2.apply(BigDecimalInfinityExtended(log2Data[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        log2_data[i][1]
+                        log2Data[i][1]
                     )
                 )
-                `when`(log3.apply(BigDecimalInfinityExtended(log3_data[i][0]))).thenReturn(
+                `when`(log3.apply(BigDecimalInfinityExtended(log3Data[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        log3_data[i][1]
+                        log3Data[i][1]
                     )
                 )
-                `when`(log5.apply(BigDecimalInfinityExtended(log5_data[i][0]))).thenReturn(
+                `when`(log5.apply(BigDecimalInfinityExtended(log5Data[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
-                        log5_data[i][1]
+                        log5Data[i][1]
                     )
                 )
             }
