@@ -3,6 +3,7 @@ package file.csv
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
+import java.math.BigDecimal
 import java.nio.file.Path
 
 class CSVUtils(private val folderPath: String) {
@@ -24,12 +25,13 @@ class CSVUtils(private val folderPath: String) {
     }
     companion object {
         @JvmStatic
-        fun readCSV(filePath: Path): List<List<Double>> {
-            val data = mutableListOf<List<Double>>()
-            filePath.toFile().bufferedReader().use { reader ->
+        fun readCSV(fileName: String): List<List<BigDecimal>> {
+            val data = mutableListOf<List<BigDecimal>>()
+            File(fileName).bufferedReader().use { reader ->
                 var line = reader.readLine()
+                line = reader.readLine()
                 while (line != null) {
-                    val values = line.split(",").map { it.trim().toDouble() }
+                    val values = line.split(",").map { it.trim().toBigDecimal() }
                     data.add(values)
                     line = reader.readLine()
                 }

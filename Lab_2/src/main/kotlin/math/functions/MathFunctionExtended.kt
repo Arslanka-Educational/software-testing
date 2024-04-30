@@ -87,7 +87,7 @@ infix fun <Input> MathFunction<Input, BigDecimalInfinityExtended>.pow(num: Int):
         }
 
         override fun calculate(input: Input): BigDecimalInfinityExtended {
-            return BigDecimalInfinityExtended(this@pow.calculate(input).toBigDecimal().pow(num))
+            return BigDecimalInfinityExtended(this@pow.apply(input).toBigDecimal().pow(num))
         }
     }
 }

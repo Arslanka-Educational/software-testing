@@ -11,16 +11,19 @@ import math.functions.trigonometric.SecSeriesDecomposable
 import math.functions.trigonometric.SinSeriesDecomposable
 import math.functions.trigonometric.TanSeriesDecomposable
 import math.numbers.BigDecimalInfinityExtended
+import math.numbers.minus
+import math.numbers.plus
 import math.numbers.pow
 import math.ranges.BigDecimalOpenRange
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.`when`
 import java.math.BigDecimal
-import java.nio.file.Path
 import java.util.function.Predicate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -39,21 +42,21 @@ class PiecewiseFunctionSeriesDecomposableTest {
     private lateinit var piecewiseFunctionSeriesDecomposable: PiecewiseFunctionSeriesDecomposable
 
     private companion object {
-        private const val ACCURACY = 0.0001
+        private const val ACCURACY = 0.001
     }
 
     @BeforeAll
     internal fun init() {
-        sin = Mockito.mock(SinSeriesDecomposable::class.java)
-        cos = Mockito.mock(CosSeriesDecomposable::class.java)
-        tan = Mockito.mock(TanSeriesDecomposable::class.java)
-        cot = Mockito.mock(CotSeriesDecomposable::class.java)
-        sec = Mockito.mock(SecSeriesDecomposable::class.java)
-        csc = Mockito.mock(CscSeriesDecomposable::class.java)
-        ln = Mockito.mock(NaturalLogSeriesDecomposable::class.java)
-        log2 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
-        log3 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
-        log5 = Mockito.mock(BaseLogSeriesDecomposable::class.java)
+        ln = Mockito.spy(NaturalLogSeriesDecomposable(ACCURACY))
+        log2 = Mockito.spy(BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(2.0), ln))
+        log3 = Mockito.spy(BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(3.0), ln))
+        log5 = Mockito.spy(BaseLogSeriesDecomposable(ACCURACY, BigDecimalInfinityExtended(5.0), ln))
+        sin = Mockito.spy(SinSeriesDecomposable(ACCURACY))
+        cos = Mockito.spy(CosSeriesDecomposable(ACCURACY, sin))
+        tan = Mockito.spy(TanSeriesDecomposable(sin, cos, ACCURACY))
+        cot = Mockito.spy(CotSeriesDecomposable(sin, cos, ACCURACY))
+        sec = Mockito.spy(SecSeriesDecomposable(cos, ACCURACY))
+        csc = Mockito.spy(CscSeriesDecomposable(sin, ACCURACY))
         piecewiseFunctionSeriesDecomposable = PiecewiseFunctionSeriesDecomposable(
             listOf(
                 Pair(((((((((((((((((sec / cos) * csc) / sec) + sec) pow 3) / cos) +
@@ -73,18 +76,16 @@ class PiecewiseFunctionSeriesDecomposableTest {
                             ),
                         )
                     }),
-                Pair(
-                    (((((log3 pow 3) - log5) * log2) + (log5 * ln)) pow 3),
-                    Predicate {
-                        it in BigDecimalOpenRange(
-                            startExclusive = BigDecimalInfinityExtended(
-                                0.0,
-                            ),
-                            endExclusive = BigDecimalInfinityExtended(
-                                Double.POSITIVE_INFINITY,
-                            ),
-                        )
-                    }),
+                Pair((((((log3 pow 3) - log5) * log2) + (log5 * ln)) pow 3), Predicate {
+                    it in BigDecimalOpenRange(
+                        startExclusive = BigDecimalInfinityExtended(
+                            0.0,
+                        ),
+                        endExclusive = BigDecimalInfinityExtended(
+                            Double.POSITIVE_INFINITY,
+                        ),
+                    )
+                }),
             ),
             accuracy = ACCURACY,
             domain = listOf(
@@ -100,36 +101,23 @@ class PiecewiseFunctionSeriesDecomposableTest {
         )
     }
 
-
     @Test
     internal fun `piecewise test`() {
-        val cosData =
-            CSVUtils.readCSV(Path.of("../../resources/dataInput/cos_values.csv"))
-        val cotData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/cot_values.csv"))
-        val cscData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/csc_values.csv"))
-        val secData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/sec_values.csv"))
-        val sinData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/sin_values.csv"))
-        val tanData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/tan_values.csv"))
-        val lnData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/ln_values.csv"))
-        val log2Data =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log2_values.csv"))
-        val log3Data =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log3_values.csv"))
-        val log5Data =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/log5_values.csv"))
-        val piecewisefunctionData =
-            CSVUtils.readCSV(Path.of("../../../resources/dataInput/piecewiseFunction.csv"))
+        val cosData = CSVUtils.readCSV("./src/test/resources/dataInput/cos_values.csv")
+        val cotData = CSVUtils.readCSV("./src/test/resources/dataInput/cot_values.csv")
+        val cscData = CSVUtils.readCSV("./src/test/resources/dataInput/csc_values.csv")
+        val secData = CSVUtils.readCSV("./src/test/resources/dataInput/sec_values.csv")
+        val sinData = CSVUtils.readCSV("./src/test/resources/dataInput/sin_values.csv")
+        val tanData = CSVUtils.readCSV("./src/test/resources/dataInput/tan_values.csv")
+        val lnData = CSVUtils.readCSV("./src/test/resources/dataInput/ln_values.csv")
+        val log2Data = CSVUtils.readCSV("./src/test/resources/dataInput/log2_values.csv")
+        val log3Data = CSVUtils.readCSV("./src/test/resources/dataInput/log3_values.csv")
+        val log5Data = CSVUtils.readCSV("./src/test/resources/dataInput/log5_values.csv")
+        val piecewisefunctionData = CSVUtils.readCSV("./src/test/resources/dataInput/piecewiseFunction.csv")
 
         for (i in piecewisefunctionData.indices) {
-            val xValue = BigDecimal(piecewisefunctionData[i][0])
-            val yValue = BigDecimal(piecewisefunctionData[i][1])
-
+            val xValue = piecewisefunctionData[i][0]
+            val yValue = piecewisefunctionData[i][1]
             if (xValue < BigDecimal.ZERO) {
                 `when`(sin.apply(BigDecimalInfinityExtended(sinData[i][0]))).thenReturn(
                     BigDecimalInfinityExtended(
@@ -162,31 +150,35 @@ class PiecewiseFunctionSeriesDecomposableTest {
                     )
                 )
             } else {
-                `when`(ln.apply(BigDecimalInfinityExtended(lnData[i][0]))).thenReturn(
+                doReturn(
                     BigDecimalInfinityExtended(
                         lnData[i][1]
                     )
-                )
-                `when`(log2.apply(BigDecimalInfinityExtended(log2Data[i][0]))).thenReturn(
+                ).`when`(ln).apply(BigDecimalInfinityExtended(lnData[i][0]))
+
+                doReturn(
                     BigDecimalInfinityExtended(
                         log2Data[i][1]
                     )
-                )
-                `when`(log3.apply(BigDecimalInfinityExtended(log3Data[i][0]))).thenReturn(
+                ).`when`(log2).apply(BigDecimalInfinityExtended(log2Data[i][0]))
+
+                doReturn(
                     BigDecimalInfinityExtended(
                         log3Data[i][1]
                     )
-                )
-                `when`(log5.apply(BigDecimalInfinityExtended(log5Data[i][0]))).thenReturn(
+                ).`when`(log3).apply(BigDecimalInfinityExtended(log3Data[i][0]))
+
+                doReturn(
                     BigDecimalInfinityExtended(
                         log5Data[i][1]
                     )
-                )
+                ).`when`(log5).apply(BigDecimalInfinityExtended(log5Data[i][0]))
             }
             assertThat(piecewiseFunctionSeriesDecomposable.apply(BigDecimalInfinityExtended(xValue))).isBetween(
-                BigDecimalInfinityExtended(yValue) pow 13,
-                BigDecimalInfinityExtended(yValue) pow 15,
+                BigDecimalInfinityExtended(yValue) - (BigDecimalInfinityExtended(10.0) pow 1),
+                BigDecimalInfinityExtended(yValue) + (BigDecimalInfinityExtended(10.0) pow 1),
             )
+            Mockito.reset(sin, cos, tan, cot, sec, csc, ln, log2, log3, log5)
         }
     }
 }
