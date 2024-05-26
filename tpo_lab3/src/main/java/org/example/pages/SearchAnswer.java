@@ -14,10 +14,10 @@ public class SearchAnswer {
     @FindBy(xpath = "//*[@id=\"search-input\"]")
     private WebElement inputField;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/main/section[1]/div[2]/button")
+    @FindBy(xpath = "//*[@class=\"py-2 px-3 rounded-md flex items-center justify-center bg-primaryColor text-secondaryLight caption3 ml-1\"]")
     private WebElement searchButton;
 
-    @FindBy(xpath = " //*[@id=\"best-answer\"]/div[4]/div[2]/button[2]")
+    @FindBy(xpath = "//*[@id=\"best-answer\"]/div[4]/div[2]/button[2]")
     private WebElement viewPage;
 
     @FindBy(xpath = "//*[@id=\"top-answer\"]/div[2]/div[1]/div/p")

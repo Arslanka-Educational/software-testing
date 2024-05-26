@@ -14,29 +14,66 @@ public class SearchAdvanceAnswer {
         this.webDriver = webDriver;
     }
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[4]/form/div/div[1]/svg")
+    @FindBy(xpath = "//*[name()='use' and @*='#adv-config']")
     private WebElement openAdvanceSearch;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/input")
+    @FindBy(xpath = "//*[@type=\"text\"]")
     private WebElement searchTerm;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div[2]/button/div")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[2]/button/div")
     private WebElement contentType;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div[3]/button/div")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[2]/div/div/span[1]/span")
+    private WebElement selectСontentType;
+
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[3]/button/div")
     private WebElement subject;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div[4]/button/div")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[3]/div/div/span[1]/span")
+    private WebElement selectsubject;
+
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[4]/button/div")
     private WebElement category;
 
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[4]/div/div/span[2]/span")
+    private WebElement selectCategory;
+
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[5]/div[3]/input")
+    private WebElement selectRadio;
 
 
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[6]/button/div")
+    private WebElement sortBy;
 
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[6]/div/div/span[1]")
+    private  WebElement selectSortBy;
 
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div[7]/button")
+    private  WebElement search;
+
+    @FindBy(xpath = "//*[@type=\"number\"]")
+    private WebElement addNumber;
+
+    public WebElement getSelectSortBy() {
+        return selectSortBy;
+    }
+    public WebElement getSearch() {
+        return search;
+    }
+    public WebElement getAddNumber() {
+        return addNumber;
+    }
+
+    public WebElement getSortBy() {
+        return sortBy;
+    }
+
+    public WebElement getSelectRadio() {
+        return selectRadio;
+    }
     public WebElement getOpenAdvanceSearch() {
         return openAdvanceSearch;
     }
-
     public WebElement getSearchTerm() {
         return searchTerm;
     }
@@ -51,6 +88,16 @@ public class SearchAdvanceAnswer {
 
     public WebElement getCategory() {
         return category;
+    }
+    public WebElement getSelectСontentType() {
+        return selectСontentType;
+    }
+    public WebElement getSelectsubject() {
+        return selectsubject;
+    }
+
+    public WebElement getSelectCategory() {
+        return selectCategory;
     }
 
 

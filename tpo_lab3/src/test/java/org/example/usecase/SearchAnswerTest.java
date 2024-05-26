@@ -19,12 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SearchAnswerTest {
 
-
-    @BeforeEach
-    void init() {
-
-    }
-
     @Test
     void searchAnswer() {
         Utils.getDrivers().forEach(webDriver -> {

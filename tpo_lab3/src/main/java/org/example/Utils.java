@@ -31,11 +31,12 @@ public class Utils {
 
     public static List<WebDriver> getDrivers() {
         return List.of(
-               getChromeDriver());
-            //   getFireFoxDriver());
+               getChromeDriver()//,
+                //  getFireFoxDriver()
+        );
     }
 
     public static void wait10Sec(WebDriver webDriver) {
-        webDriver.manage().timeouts().implicitlyWait(Duration.of(20, ChronoUnit.SECONDS));
+        webDriver.manage().timeouts().implicitlyWait(Duration.of(10, ChronoUnit.SECONDS));
     }
 }

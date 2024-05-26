@@ -18,7 +18,7 @@ public class Profile {
     private WebElement clickAvatar;
 
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[3]/span/div/div/div/button[2]/a/span")
+    @FindBy(xpath = "//*[@href=\'https://www.answers.com/user/profile']/span")
     private WebElement clickSettings;
 
     //*[@id="checkbox"]/input

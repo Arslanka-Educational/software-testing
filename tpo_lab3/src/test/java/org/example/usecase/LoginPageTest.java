@@ -81,27 +81,29 @@ public class LoginPageTest {
 
     @Test
     void loginErrorTest() {
-        WebDriver webDriver = Utils.getChromeDriver();
-        webDriver.manage().window().maximize();
-        //задержка на выполнение теста = 10 сек.
-        wait10Sec(webDriver);
-        webDriver.get("https://www.answers.com/");
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.getSignInButton().click();
-        loginPage.getSignInButtonWhitEmail().click();
-        loginPage.getEmailField().sendKeys("maggisapphire@finacenter.com");
-        loginPage.getPasswordField().sendKeys("4234");
-        loginPage.getSubmit().click();
-        String text = loginPage.getErrorMessage().getText();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        webDriver.quit();
-        assertEquals(
-                "Passwords must be between 8 and 40 characters long",
-                text
-        );
+        Utils.getDrivers().forEach(webDriver -> {
+            webDriver.manage().window().maximize();
+            webDriver.manage().window().maximize();
+            //задержка на выполнение теста = 10 сек.
+            wait10Sec(webDriver);
+            webDriver.get("https://www.answers.com/");
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.getSignInButton().click();
+            loginPage.getSignInButtonWhitEmail().click();
+            loginPage.getEmailField().sendKeys("maggisapphire@finacenter.com");
+            loginPage.getPasswordField().sendKeys("4234");
+            loginPage.getSubmit().click();
+            String text = loginPage.getErrorMessage().getText();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            webDriver.quit();
+            assertEquals(
+                    "Passwords must be between 8 and 40 characters long",
+                    text
+            );
+        });
     }
 }

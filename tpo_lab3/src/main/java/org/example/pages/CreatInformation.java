@@ -13,60 +13,60 @@ public class CreatInformation {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[1]/div/button/button")
+    @FindBy(xpath = "//*[@class=\"block focus:outline-none\"]/button")
     private WebElement creatSomeThing;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[1]/div/div/div/span[1]/button/img")
+    @FindBy(xpath = "//*[@class=\"undefined undefined\"]/../span[1]/button/img")
     private WebElement creatQuestion;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[1]/div/div/div/span[2]/button/img")
+    @FindBy(xpath = "//*[@class=\"undefined undefined\"]/../span[2]/button/img")
     private WebElement studyGuide;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div[1]/textarea")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div/div[2]/div[1]/textarea")
+    //*[@id="root"]/div/div[4]/div/div[2]
+    //*[@id="root"]/div/div[4]/div/div[2]/div/div[2]/div[1]/textarea
     private WebElement textQuestion;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[1]/button[2]")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div/div[1]/button[2]")
     private WebElement submitQuestion;
 
     @FindBy(xpath = "//*[@id=\"question-title\"]")
     private WebElement answer;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[4]/div/div[2]/div/div[2]/div/div[2]/button/span\n")
+    @FindBy(xpath = "//*[@role=\"dialog\"]/div/div[2]/div/div[2]/button/span\n")
     private WebElement clickForAnswer;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div[3]/textarea")
+    @FindBy(xpath = "//*[@class=\"p-4 bg-white md:rounded shadow-cardGlow\"]/div[3]/textarea")
     private WebElement addATitle;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div[5]/textarea")
+    @FindBy(xpath = "//*[@class=\"p-4 bg-white md:rounded shadow-cardGlow\"]/div[5]/textarea")
     private WebElement addADescription;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div[7]/div[1]/input")
+    @FindBy(xpath = "//*[@class=\" relative flex flex-row whitespace-nowrap space-x-2 no-scrollbar \"]/div[1]/input")
     private WebElement addTags1;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div[7]/div[2]/input")
+    @FindBy(xpath = "//*[@class=\" relative flex flex-row whitespace-nowrap space-x-2 no-scrollbar \"]/div[2]/input")
     private WebElement addTags2;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div[7]/div[3]/input")
+    @FindBy(xpath = "//*[@class=\" relative flex flex-row whitespace-nowrap space-x-2 no-scrollbar \"]/div[3]/input")
     private WebElement addTags3;
 
     @FindBy(xpath = "//*[@id=\"editGuides\"]/div/div[1]/div[1]")
+
     private WebElement addTerm;
 
     @FindBy(xpath = "//*[@id=\"editGuides\"]/div/div[2]/div[1]")
     private WebElement addDefinition;
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/button[1]")
+    @FindBy(xpath = "//*[@class=\"p-4 mt-4 bg-white md:rounded shadow-cardGlow\"]/div[2]/button[1]")
     private WebElement addNewCard;
-
-    //@FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]")
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]") //TODO ПОЛНЫЕ ПУТИ
-
+    @FindBy(xpath = "//*[@id=\"editGuides\"]/../../div[2]/div/div/div[1]/div[1]")
     private WebElement addTerm1;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]") //TODO ПОЛНЫЕ ПУТИ
+    @FindBy(xpath = "//*[@id=\"editGuides\"]/../../div[2]/div/div/div[2]/div[1]")
     private WebElement addDefinition1;
 
-    @FindBy(xpath = "   //*[@id=\"root\"]/div/div[2]/div/div[2]/h1/a")
+    @FindBy(xpath = "//*[text()='What color are the socks!!!!!']")
     private WebElement textGuide;
 
     @FindBy(xpath = "//*[@id=\"createButton\"]")
@@ -115,7 +115,6 @@ public class CreatInformation {
     public WebElement getAddADescription() {
         return addADescription;
     }
-
 
     public WebElement getCreatSomeThing() {
         return creatSomeThing;

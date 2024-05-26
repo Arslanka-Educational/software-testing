@@ -14,14 +14,14 @@ public class LoginPage {
         this.webDriver = webDriver;
     }
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[3]/span/button")
+    @FindBy(xpath = "//*[text()='Log in']")
     private WebElement logInButton;
 
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div/div/div[4]/div/div[2]/div/div[2]/div[2]/div/button[4]")
+    @FindBy(xpath = "//*[text()='Log in with email']")
     private WebElement logInWithEmail;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div/div/div[4]/div/div[2]/div[2]/form/button")
+    @FindBy(xpath = "//*[@type=\"submit\"]")
     private WebElement submit;
 
 
@@ -36,7 +36,8 @@ public class LoginPage {
     private WebElement avatar;
 
 
-    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[3]/span/div/div/div/button[3]/a/span")
+    @FindBy(xpath = "//*[@href=\'https://www.answers.com/logout']/span")
+  //  @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/div/div[4]/div[3]/span/div/div/div/button[3]/a/span")
     private WebElement logUot;
 
     @FindBy(xpath = "//*[@id=\"loginUser\"]/div[2]/span")
