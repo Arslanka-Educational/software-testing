@@ -52,6 +52,18 @@ public class ProfileTest {
                 throw new RuntimeException(e);
             }
             profile.getClickCheckBoxEmail3().click();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            profile.getClickCheckBoxEmail4().click();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            profile.getClickCheckBoxEmail5().click();
 
             webDriver.quit();
         });

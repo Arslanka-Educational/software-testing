@@ -23,14 +23,21 @@ public class Profile {
 
     //*[@id="checkbox"]/input
 
-    @FindBy(xpath = "//*[@id=\"checkbox\"]/input")
+    @FindBy(xpath = "//*[@value=\"optInEmail\"]/input")
     private WebElement clickCheckBoxEmail;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[2]/div/div[4]/fieldset/div/label[1]/div/input")//TODO ПОЛНЫЕ ПУТИ
+    @FindBy(xpath = "//*[@value=\"optInEmailNotifications\"]/input")
     private WebElement clickCheckBoxEmail2;
 
-    @FindBy(xpath = "/html/body/div[1]/div[1]/div[2]/div/div/div[2]/div/div[4]/fieldset/div/label[2]/div/input")//TODO ПОЛНЫЕ ПУТИ
+    @FindBy(xpath = "//*[@value=\"optInDatabaseNotifications\"]/input")
     private WebElement clickCheckBoxEmail3;
+
+    @FindBy(xpath = "//*[@value=\"optInNotifications\"]/input")
+    private WebElement clickCheckBoxEmail4;
+
+    @FindBy(xpath = "//*[@value=\"optInPpid\"]/input")
+    private WebElement clickCheckBoxEmail5;
+
 
     public WebElement getClickCheckBoxEmail2() {
         return clickCheckBoxEmail2;
@@ -40,6 +47,13 @@ public class Profile {
         return clickCheckBoxEmail3;
     }
 
+    public WebElement getClickCheckBoxEmail5() {
+        return clickCheckBoxEmail5;
+    }
+
+    public WebElement getClickCheckBoxEmail4() {
+        return clickCheckBoxEmail4;
+    }
 
     public WebElement getClickAvatar() {
         return clickAvatar;
